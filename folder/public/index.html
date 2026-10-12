@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Great British Warcraft Guild – Roster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a1220; --panel:#111c30; --panel2:#16243d; --line:#24375a;
+  --gold:#e6b84a; --gold2:#f5d98a; --blue:#1f4f9c; --text:#e8edf6; --muted:#8fa0bd;
+  --red:#c8323a; --ok:#3fbf7f;
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -200px,#1b3566 0%,var(--bg) 60%) fixed;color:var(--text);font:15px/1.5 Inter,system-ui,sans-serif}
+a{color:var(--gold2)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 16px 60px}
+header{display:flex;align-items:center;gap:18px;padding:28px 0 18px;border-bottom:1px solid var(--line);margin-bottom:22px;flex-wrap:wrap}
+.crest{width:64px;height:76px;flex:none}
+h1{font-family:Cinzel,serif;font-weight:800;font-size:clamp(22px,4vw,34px);margin:0;letter-spacing:.5px;color:var(--gold2);text-shadow:0 2px 12px rgba(230,184,74,.25)}
+.sub{color:var(--muted);margin:2px 0 0;font-size:14px}
+.sub b{color:#6fa2ff}
+.hdr-actions{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
+button,.btn{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:9px 14px}
+button:hover{border-color:var(--gold)}
+.primary{background:linear-gradient(180deg,#f0c75a,#c9952b);color:#1a1205;border-color:#f5d98a;font-weight:600}
+.primary:hover{filter:brightness(1.08)}
+.ghost{background:transparent}
+.danger{color:#ffb3b7;border-color:#5a2730}
+.small{padding:5px 9px;font-size:13px}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.stat .n{font-family:Cinzel,serif;font-size:30px;font-weight:800;color:var(--gold2);line-height:1.1}
+.stat .l{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.8px}
+
+.grid{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;margin-bottom:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+.card h2{font-family:Cinzel,serif;font-size:17px;margin:0 0 12px;color:var(--gold2);letter-spacing:.4px}
+.bars{display:grid;gap:7px}
+.bar{display:grid;grid-template-columns:120px 1fr 28px;align-items:center;gap:10px;font-size:14px;cursor:pointer}
+.bar .track{height:14px;background:#0c1527;border-radius:7px;overflow:hidden}
+.bar .fill{height:100%;border-radius:7px;transition:width .4s}
+.bar .c{text-align:right;color:var(--muted)}
+.bar.active .track{outline:1px solid var(--gold)}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-size:13px;cursor:pointer}
+.chip b{color:var(--gold2);margin-left:4px}
+.chip.active{border-color:var(--gold)}
+.profs{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.prof{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 11px;cursor:pointer}
+.prof.active{border-color:var(--gold)}
+.prof .t{display:flex;justify-content:space-between;font-weight:600}
+.prof .t span{color:var(--gold2)}
+.prof .w{color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prof.gap{border-style:dashed;opacity:.7}
+.prof.gap .w{color:#ff9aa0}
+
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.toolbar input,.toolbar select{flex:1;min-width:150px}
+input,select{font:inherit;background:#0c1527;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:9px 11px;width:100%}
+input:focus,select:focus{outline:none;border-color:var(--gold)}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;color:var(--muted);font-weight:500;font-size:12.5px;text-transform:uppercase;letter-spacing:.6px;padding:8px 10px;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap}
+td{padding:9px 10px;border-bottom:1px solid #1a2a46;white-space:nowrap}
+tr:hover td{background:#132140}
+.cname{font-weight:600}
+.role{display:inline-block;font-size:12px;padding:2px 8px;border-radius:999px;border:1px solid var(--line)}
+.role.Tank{color:#8fc1ff;border-color:#2b4f86}.role.Healer{color:#7fe0a8;border-color:#2a6b4b}.role.DPS{color:#ff9f8f;border-color:#7a3a33}
+.mine{font-size:11px;color:var(--gold);margin-left:6px}
+.empty{text-align:center;color:var(--muted);padding:36px 10px}
+.status{font-size:12.5px;color:var(--muted)}
+
+dialog{background:var(--panel);color:var(--text);border:1px solid var(--gold);border-radius:14px;padding:0;width:min(560px,94vw)}
+dialog::backdrop{background:rgba(3,7,15,.75)}
+.dlg-h{padding:16px 20px;border-bottom:1px solid var(--line);font-family:Cinzel,serif;font-size:19px;color:var(--gold2)}
+form .body{padding:18px 20px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:grid;gap:5px;font-size:13px;color:var(--muted)}
+.full{grid-column:1/-1}
+.dlg-f{padding:14px 20px;border-top:1px solid var(--line);display:flex;gap:10px;justify-content:flex-end;align-items:center}
+.err{color:#ff9aa0;font-size:13.5px;margin-right:auto}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--panel2);border:1px solid var(--gold);padding:10px 16px;border-radius:10px;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+
+@media (max-width:860px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){form .body{grid-template-columns:1fr}.bar{grid-template-columns:96px 1fr 24px}.hdr-actions{margin-left:0;width:100%}.hdr-actions button{flex:1}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <svg class="crest" viewBox="0 0 64 76" aria-hidden="true">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a63c4"/><stop offset="1" stop-color="#132f63"/></linearGradient></defs>
+      <path d="M32 2 L60 10 V38 C60 56 46 68 32 74 C18 68 4 56 4 38 V10 Z" fill="url(#g)" stroke="#e6b84a" stroke-width="3"/>
+      <path d="M32 12 V64 M12 34 H52" stroke="#c8323a" stroke-width="7"/>
+      <path d="M32 12 V64 M12 34 H52" stroke="#fff" stroke-width="2.2" opacity=".9"/>
+      <path d="M32 22 L36 31 L46 32 L38 38 L41 48 L32 42 L23 48 L26 38 L18 32 L28 31 Z" fill="#e6b84a" stroke="#7a5a12" stroke-width="1"/>
+    </svg>
+    <div>
+      <h1>The Great British Warcraft Guild</h1>
+      <p class="sub"><b>For the Alliance!</b> · Guild class, race &amp; profession tracker</p>
+    </div>
+    <div class="hdr-actions">
+      <button class="ghost" id="officerBtn">Officer login</button>
+      <button class="primary" id="addBtn">+ Add your character</button>
+    </div>
+  </header>
+
+  <section class="stats">
+    <div class="stat"><div class="n" id="sTotal">0</div><div class="l">Characters</div></div>
+    <div class="stat"><div class="n" id="sTank">0</div><div class="l">Tanks</div></div>
+    <div class="stat"><div class="n" id="sHeal">0</div><div class="l">Healers</div></div>
+    <div class="stat"><div class="n" id="sDps">0</div><div class="l">DPS</div></div>
+  </section>
+
+  <section class="grid">
+    <div class="card"><h2>Classes</h2><div class="bars" id="classBars"></div></div>
+    <div class="card"><h2>Races</h2><div class="chips" id="raceChips"></div></div>
+  </section>
+
+  <section class="card" style="margin-bottom:18px">
+    <h2>Profession coverage</h2>
+    <div class="profs" id="profGrid"></div>
+  </section>
+
+  <section class="card">
+    <h2>Guild roster</h2>
+    <div class="toolbar">
+      <input id="q" placeholder="Search name or player…">
+      <select id="fClass"><option value="">All classes</option></select>
+      <select id="fRole"><option value="">All roles</option><option>Tank</option><option>Healer</option><option>DPS</option></select>
+      <select id="fProf"><option value="">All professions</option></select>
+      <button class="ghost small" id="clearBtn">Clear filters</button>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr>
+          <th data-k="name">Character</th><th data-k="player">Player</th><th data-k="cls">Class</th><th data-k="spec">Spec</th>
+          <th data-k="role">Role</th><th data-k="race">Race</th><th data-k="level">Lvl</th><th data-k="prof1">Professions</th><th></th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p class="status" id="status">Loading roster…</p>
+  </section>
+</div>
+
+<dialog id="dlg">
+  <form id="form" method="dialog">
+    <div class="dlg-h" id="dlgTitle">Add your character</div>
+    <div class="body">
+      <label>Character name *<input name="name" maxlength="24" required></label>
+      <label>Player / Discord name<input name="player" maxlength="32"></label>
+      <label>Class *<select name="cls" required></select></label>
+      <label>Spec<select name="spec"></select></label>
+      <label>Role *<select name="role" required><option>Tank</option><option>Healer</option><option selected>DPS</option></select></label>
+      <label>Race *<select name="race" required></select></label>
+      <label>Profession 1<select name="prof1"></select></label>
+      <label>Profession 2<select name="prof2"></select></label>
+      <label class="full">Level<input name="level" type="number" min="1" max="90" placeholder="Optional"></label>
+    </div>
+    <div class="dlg-f">
+      <span class="err" id="err"></span>
+      <button type="button" class="ghost" id="cancelBtn">Cancel</button>
+      <button type="submit" class="primary" id="saveBtn">Save to roster</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = "/api/roster";
+const CLASSES = {
+  "Death Knight":{c:"#C41E3A",s:{Blood:"Tank",Frost:"DPS",Unholy:"DPS"}},
+  "Demon Hunter":{c:"#A330C9",s:{Havoc:"DPS",Vengeance:"Tank"}},
+  "Druid":{c:"#FF7C0A",s:{Balance:"DPS",Feral:"DPS",Guardian:"Tank",Restoration:"Healer"}},
+  "Evoker":{c:"#33937F",s:{Devastation:"DPS",Preservation:"Healer",Augmentation:"DPS"}},
+  "Hunter":{c:"#AAD372",s:{"Beast Mastery":"DPS",Marksmanship:"DPS",Survival:"DPS"}},
+  "Mage":{c:"#3FC7EB",s:{Arcane:"DPS",Fire:"DPS",Frost:"DPS"}},
+  "Monk":{c:"#00FF98",s:{Brewmaster:"Tank",Mistweaver:"Healer",Windwalker:"DPS"}},
+  "Paladin":{c:"#F48CBA",s:{Holy:"Healer",Protection:"Tank",Retribution:"DPS"}},
+  "Priest":{c:"#FFFFFF",s:{Discipline:"Healer",Holy:"Healer",Shadow:"DPS"}},
+  "Rogue":{c:"#FFF468",s:{Assassination:"DPS",Outlaw:"DPS",Subtlety:"DPS"}},
+  "Shaman":{c:"#0070DD",s:{Elemental:"DPS",Enhancement:"DPS",Restoration:"Healer"}},
+  "Warlock":{c:"#8788EE",s:{Affliction:"DPS",Demonology:"DPS",Destruction:"DPS"}},
+  "Warrior":{c:"#C69B6D",s:{Arms:"DPS",Fury:"DPS",Protection:"Tank"}},
+};
+const RACES = ["Human","Dwarf","Night Elf","Gnome","Draenei","Worgen","Pandaren","Dracthyr","Void Elf","Lightforged Draenei","Dark Iron Dwarf","Kul Tiran","Mechagnome","Earthen"];
+const PROFS = ["Alchemy","Blacksmithing","Enchanting","Engineering","Herbalism","Inscription","Jewelcrafting","Leatherworking","Mining","Skinning","Tailoring"];
+
+let roster = [], editingId = null, sortKey = "name", sortDir = 1;
+const F = { q:"", cls:"", role:"", prof:"", race:"" };
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (m) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+
+// Ownership tokens live in this browser so members can edit/remove their own characters.
+const store = {
+  get(k, d){ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
+  set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+};
+let tokens = store.get("gbwg-tokens", {});
+let officerPin = (() => { try { return sessionStorage.getItem("gbwg-pin") || ""; } catch { return ""; } })();
+
+function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),2600); }
+const opt = (v, sel) => `<option ${v===sel?"selected":""}>${esc(v)}</option>`;
+
+// Populate selects
+const clsNames = Object.keys(CLASSES).sort();
+$("fClass").innerHTML += clsNames.map(c=>opt(c)).join("");
+$("fProf").innerHTML += PROFS.map(p=>opt(p)).join("");
+const f = $("form");
+f.cls.innerHTML = clsNames.map(c=>opt(c)).join("");
+f.race.innerHTML = RACES.map(r=>opt(r)).join("");
+f.prof1.innerHTML = f.prof2.innerHTML = ["None",...PROFS].map(p=>opt(p)).join("");
+function fillSpecs(spec){
+  const specs = Object.keys(CLASSES[f.cls.value].s);
+  f.spec.innerHTML = specs.map(s=>opt(s, spec)).join("");
+  syncRole();
+}
+function syncRole(){ const r = CLASSES[f.cls.value].s[f.spec.value]; if (r) f.role.value = r; }
+f.cls.onchange = () => fillSpecs();
+f.spec.onchange = syncRole;
+
+async function load(){
+  try {
+    const r = await fetch(API, { cache:"no-store" });
+    if (!r.ok) throw new Error();
+    roster = await r.json();
+    $("status").textContent = `Last updated ${new Date().toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"})} · refreshes automatically`;
+    render();
+  } catch {
+    $("status").textContent = "Couldn't reach the roster. Check the site is deployed with Netlify Functions.";
+  }
+}
+
+function render(){
+  $("sTotal").textContent = roster.length;
+  $("sTank").textContent = roster.filter(c=>c.role==="Tank").length;
+  $("sHeal").textContent = roster.filter(c=>c.role==="Healer").length;
+  $("sDps").textContent = roster.filter(c=>c.role==="DPS").length;
+
+  const max = Math.max(1, ...clsNames.map(c=>roster.filter(x=>x.cls===c).length));
+  $("classBars").innerHTML = clsNames.map(c=>{
+    const n = roster.filter(x=>x.cls===c).length;
+    return `<div class="bar ${F.cls===c?"active":""}" data-cls="${esc(c)}"><span style="color:${CLASSES[c].c}">${esc(c)}</span>
+      <div class="track"><div class="fill" style="width:${n/max*100}%;background:${CLASSES[c].c}"></div></div><span class="c">${n}</span></div>`;
+  }).join("");
+
+  const raceCounts = RACES.map(r=>[r, roster.filter(x=>x.race===r).length]).sort((a,b)=>b[1]-a[1]);
+  $("raceChips").innerHTML = raceCounts.map(([r,n])=>`<span class="chip ${F.race===r?"active":""}" data-race="${esc(r)}">${esc(r)}<b>${n}</b></span>`).join("");
+
+  $("profGrid").innerHTML = PROFS.map(p=>{
+    const who = roster.filter(x=>x.prof1===p||x.prof2===p);
+    return `<div class="prof ${who.length?"":"gap"} ${F.prof===p?"active":""}" data-prof="${esc(p)}" title="${esc(who.map(w=>w.name).join(", "))}">
+      <div class="t">${esc(p)}<span>${who.length}</span></div>
+      <div class="w">${who.length ? esc(who.map(w=>w.name).join(", ")) : "Nobody yet – wanted!"}</div></div>`;
+  }).join("");
+
+  const q = F.q.toLowerCase();
+  let list = roster.filter(c =>
+    (!q || c.name.toLowerCase().includes(q) || (c.player||"").toLowerCase().includes(q)) &&
+    (!F.cls || c.cls===F.cls) && (!F.role || c.role===F.role) && (!F.race || c.race===F.race) &&
+    (!F.prof || c.prof1===F.prof || c.prof2===F.prof));
+  list.sort((a,b)=> String(a[sortKey]??"").localeCompare(String(b[sortKey]??""), "en", {numeric:true}) * sortDir);
+
+  $("rows").innerHTML = list.length ? list.map(c=>{
+    const mine = !!tokens[c.id], canEdit = mine || officerPin;
+    const profs = [c.prof1,c.prof2].filter(p=>p&&p!=="None").join(" · ") || "–";
+    const col = CLASSES[c.cls]?.c || "#fff";
+    return `<tr>
+      <td class="cname" style="color:${col}">${esc(c.name)}${mine?'<span class="mine">YOU</span>':""}</td>
+      <td>${esc(c.player)||"–"}</td><td style="color:${col}">${esc(c.cls)}</td><td>${esc(c.spec)||"–"}</td>
+      <td><span class="role ${esc(c.role)}">${esc(c.role)}</span></td><td>${esc(c.race)}</td><td>${c.level??"–"}</td>
+      <td>${esc(profs)}</td>
+      <td>${canEdit?`<button class="small ghost" data-edit="${c.id}">Edit</button> <button class="small ghost danger" data-del="${c.id}">Remove</button>`:""}</td></tr>`;
+  }).join("") : `<tr><td colspan="9" class="empty">${roster.length?"No characters match those filters.":"No one's signed up yet – be the first to join the roster!"}</td></tr>`;
+
+  $("fClass").value=F.cls; $("fRole").value=F.role; $("fProf").value=F.prof;
+  $("officerBtn").textContent = officerPin ? "Officer mode ✓ (log out)" : "Officer login";
+}
+
+// Filters
+$("q").oninput = e => { F.q = e.target.value; render(); };
+$("fClass").onchange = e => { F.cls = e.target.value; render(); };
+$("fRole").onchange = e => { F.role = e.target.value; render(); };
+$("fProf").onchange = e => { F.prof = e.target.value; render(); };
+$("clearBtn").onclick = () => { Object.keys(F).forEach(k=>F[k]=""); $("q").value=""; render(); };
+$("classBars").onclick = e => { const b=e.target.closest("[data-cls]"); if(b){ F.cls = F.cls===b.dataset.cls?"":b.dataset.cls; render(); } };
+$("raceChips").onclick = e => { const b=e.target.closest("[data-race]"); if(b){ F.race = F.race===b.dataset.race?"":b.dataset.race; render(); } };
+$("profGrid").onclick = e => { const b=e.target.closest("[data-prof]"); if(b){ F.prof = F.prof===b.dataset.prof?"":b.dataset.prof; render(); } };
+document.querySelectorAll("th[data-k]").forEach(th => th.onclick = () => {
+  sortDir = sortKey===th.dataset.k ? -sortDir : 1; sortKey = th.dataset.k; render();
+});
+
+// Add / edit
+function openForm(c){
+  editingId = c?.id || null;
+  $("dlgTitle").textContent = c ? `Edit ${c.name}` : "Add your character";
+  $("err").textContent = "";
+  f.reset();
+  f.name.value = c?.name || ""; f.player.value = c?.player || store.get("gbwg-player","");
+  f.cls.value = c?.cls || "Warrior"; fillSpecs(c?.spec);
+  if (c) f.role.value = c.role;
+  f.race.value = c?.race || "Human";
+  f.prof1.value = c?.prof1 || "None"; f.prof2.value = c?.prof2 || "None";
+  f.level.value = c?.level ?? "";
+  $("dlg").showModal(); f.name.focus();
+}
+$("addBtn").onclick = () => openForm();
+$("cancelBtn").onclick = () => $("dlg").close();
+f.onsubmit = async (e) => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(f));
+  if (editingId) Object.assign(data, { id: editingId, token: tokens[editingId], pin: officerPin });
+  $("saveBtn").disabled = true; $("err").textContent = "";
+  try {
+    const r = await fetch(API, { method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify(data) });
+    const out = await r.json();
+    if (!r.ok) throw new Error(out.error || "Couldn't save.");
+    if (out.token) { tokens[out.character.id] = out.token; store.set("gbwg-tokens", tokens); }
+    if (data.player) store.set("gbwg-player", data.player);
+    $("dlg").close(); toast(editingId ? "Character updated" : `Welcome to the guild, ${out.character.name}!`);
+    await load();
+  } catch (err) { $("err").textContent = err.message; }
+  finally { $("saveBtn").disabled = false; }
+};
+
+// Edit / remove buttons
+$("rows").onclick = async (e) => {
+  const ed = e.target.closest("[data-edit]"), del = e.target.closest("[data-del]");
+  if (ed) openForm(roster.find(c=>c.id===ed.dataset.edit));
+  if (del) {
+    const c = roster.find(x=>x.id===del.dataset.del);
+    if (!confirm(`Remove ${c.name} from the roster?`)) return;
+    const r = await fetch(API, { method:"DELETE", headers:{"content-type":"application/json"}, body: JSON.stringify({ id:c.id, token:tokens[c.id], pin:officerPin }) });
+    const out = await r.json();
+    if (!r.ok) return toast(out.error || "Couldn't remove.");
+    delete tokens[c.id]; store.set("gbwg-tokens", tokens);
+    toast(`${c.name} removed`); load();
+  }
+};
+
+// Officer mode
+$("officerBtn").onclick = async () => {
+  if (officerPin) { officerPin=""; try{sessionStorage.removeItem("gbwg-pin")}catch{} render(); return toast("Logged out of officer mode"); }
+  const pin = prompt("Officer PIN:"); if (!pin) return;
+  const r = await fetch(API, { method:"PUT", headers:{"content-type":"application/json"}, body: JSON.stringify({ checkPin:true, pin }) });
+  const out = await r.json().catch(()=>({}));
+  if (!out.ok) return toast("Wrong PIN");
+  officerPin = pin; try{sessionStorage.setItem("gbwg-pin", pin)}catch{}
+  render(); toast("Officer mode on – you can edit or remove anyone");
+};
+
+render();
+load();
+setInterval(load, 30000);
+</script>
+</body>
+</html>
