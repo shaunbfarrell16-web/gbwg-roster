@@ -1,9 +1,18 @@
 import { getStore } from "@netlify/blobs";
 
 // Shared guild roster, stored in Netlify Blobs (one entry per character).
-const CLASSES = ["Warrior","Paladin","Hunter","Rogue","Priest","Death Knight","Shaman","Mage","Warlock","Monk","Druid","Demon Hunter","Evoker"];
-const RACES = ["Human","Dwarf","Night Elf","Gnome","Draenei","Worgen","Pandaren","Dracthyr","Void Elf","Lightforged Draenei","Dark Iron Dwarf","Kul Tiran","Mechagnome","Earthen"];
-const PROFS = ["None","Alchemy","Blacksmithing","Enchanting","Engineering","Herbalism","Inscription","Jewelcrafting","Leatherworking","Mining","Skinning","Tailoring"];
+// WoW Forever – Alliance races and the classes each can play
+const RACE_CLASSES = {
+  "Human": ["Hunter","Mage","Paladin","Priest","Rogue","Warlock","Warrior"],
+  "Dwarf": ["Hunter","Paladin","Priest","Rogue","Shaman","Warrior"],
+  "Night Elf": ["Druid","Hunter","Priest","Rogue","Warrior"],
+  "Gnome": ["Mage","Priest","Rogue","Warlock","Warrior"],
+  "High Order Skyborne": ["Druid","Hunter","Mage","Rogue","Warrior"],
+};
+const CLASSES = ["Druid","Hunter","Mage","Paladin","Priest","Rogue","Shaman","Warlock","Warrior"];
+const RACES = Object.keys(RACE_CLASSES);
+const PROFS = ["None","Alchemy","Blacksmithing","Enchanting","Engineering","Herbalism","Leatherworking","Mining","Skinning","Tailoring"];
+const SECONDARY = ["Cooking","First Aid","Fishing"];
 const ROLES = ["Tank","Healer","DPS"];
 
 const json = (data, status = 200) =>
@@ -42,11 +51,13 @@ export default async (req) => {
       race: clean(body.race, 24),
       prof1: clean(body.prof1, 20) || "None",
       prof2: clean(body.prof2, 20) || "None",
+      secondary: (Array.isArray(body.secondary) ? body.secondary : []).filter((p) => SECONDARY.includes(p)),
       level: parseInt(body.level, 10) ? Math.max(1, Math.min(90, parseInt(body.level, 10))) : null,
     };
     if (!c.name) return json({ error: "Character name is required." }, 400);
     if (!CLASSES.includes(c.cls)) return json({ error: "Pick a class." }, 400);
     if (!RACES.includes(c.race)) return json({ error: "Pick an Alliance race." }, 400);
+    if (!RACE_CLASSES[c.race].includes(c.cls)) return json({ error: `${c.race}s can't be ${c.cls}s in WoW Forever.` }, 400);
     if (!ROLES.includes(c.role)) return json({ error: "Pick a role." }, 400);
     if (!PROFS.includes(c.prof1) || !PROFS.includes(c.prof2)) return json({ error: "Invalid profession." }, 400);
     if (c.prof1 !== "None" && c.prof1 === c.prof2) return json({ error: "Pick two different professions." }, 400);

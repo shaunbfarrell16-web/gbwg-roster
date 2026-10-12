@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Great British Warcraft Guild – Roster</title>
+<link rel="icon" href="logo.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -16,12 +17,11 @@
 body{margin:0;background:radial-gradient(1200px 600px at 50% -200px,#1b3566 0%,var(--bg) 60%) fixed;color:var(--text);font:15px/1.5 Inter,system-ui,sans-serif}
 a{color:var(--gold2)}
 .wrap{max-width:1200px;margin:0 auto;padding:0 16px 60px}
-header{display:flex;align-items:center;gap:18px;padding:28px 0 18px;border-bottom:1px solid var(--line);margin-bottom:22px;flex-wrap:wrap}
-.crest{width:64px;height:76px;flex:none}
-h1{font-family:Cinzel,serif;font-weight:800;font-size:clamp(22px,4vw,34px);margin:0;letter-spacing:.5px;color:var(--gold2);text-shadow:0 2px 12px rgba(230,184,74,.25)}
-.sub{color:var(--muted);margin:2px 0 0;font-size:14px}
+header{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:22px 0 20px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.logo{width:clamp(180px,30vw,260px);height:auto;filter:drop-shadow(0 8px 28px rgba(230,184,74,.25)) drop-shadow(0 2px 6px rgba(0,0,0,.6))}
+.sub{color:var(--muted);margin:0;font-size:15px}
 .sub b{color:#6fa2ff}
-.hdr-actions{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
+.hdr-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 button,.btn{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:9px 14px}
 button:hover{border-color:var(--gold)}
 .primary{background:linear-gradient(180deg,#f0c75a,#c9952b);color:#1a1205;border-color:#f5d98a;font-weight:600}
@@ -78,6 +78,11 @@ dialog::backdrop{background:rgba(3,7,15,.75)}
 .dlg-h{padding:16px 20px;border-bottom:1px solid var(--line);font-family:Cinzel,serif;font-size:19px;color:var(--gold2)}
 form .body{padding:18px 20px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
 label{display:grid;gap:5px;font-size:13px;color:var(--muted)}
+.lbl{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+.checks{display:flex;gap:8px;flex-wrap:wrap}
+.checks label{display:flex;align-items:center;gap:7px;background:#0c1527;border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--text);cursor:pointer}
+.checks input{width:auto;accent-color:var(--gold)}
+.sec{color:var(--muted);font-size:12.5px}
 .full{grid-column:1/-1}
 .dlg-f{padding:14px 20px;border-top:1px solid var(--line);display:flex;gap:10px;justify-content:flex-end;align-items:center}
 .err{color:#ff9aa0;font-size:13.5px;margin-right:auto}
@@ -85,23 +90,14 @@ label{display:grid;gap:5px;font-size:13px;color:var(--muted)}
 .toast.show{opacity:1}
 
 @media (max-width:860px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:520px){form .body{grid-template-columns:1fr}.bar{grid-template-columns:96px 1fr 24px}.hdr-actions{margin-left:0;width:100%}.hdr-actions button{flex:1}}
+@media (max-width:520px){form .body{grid-template-columns:1fr}.bar{grid-template-columns:96px 1fr 24px}.hdr-actions{width:100%}.hdr-actions button{flex:1}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <svg class="crest" viewBox="0 0 64 76" aria-hidden="true">
-      <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a63c4"/><stop offset="1" stop-color="#132f63"/></linearGradient></defs>
-      <path d="M32 2 L60 10 V38 C60 56 46 68 32 74 C18 68 4 56 4 38 V10 Z" fill="url(#g)" stroke="#e6b84a" stroke-width="3"/>
-      <path d="M32 12 V64 M12 34 H52" stroke="#c8323a" stroke-width="7"/>
-      <path d="M32 12 V64 M12 34 H52" stroke="#fff" stroke-width="2.2" opacity=".9"/>
-      <path d="M32 22 L36 31 L46 32 L38 38 L41 48 L32 42 L23 48 L26 38 L18 32 L28 31 Z" fill="#e6b84a" stroke="#7a5a12" stroke-width="1"/>
-    </svg>
-    <div>
-      <h1>The Great British Warcraft Guild</h1>
-      <p class="sub"><b>For the Alliance!</b> · Guild class, race &amp; profession tracker</p>
-    </div>
+    <img class="logo" src="logo.webp" alt="The Great British Warcraft Guild crest" width="513" height="520">
+    <p class="sub"><b>For the Alliance!</b> · WoW Forever guild roster</p>
     <div class="hdr-actions">
       <button class="ghost" id="officerBtn">Officer login</button>
       <button class="primary" id="addBtn">+ Add your character</button>
@@ -153,12 +149,14 @@ label{display:grid;gap:5px;font-size:13px;color:var(--muted)}
     <div class="body">
       <label>Character name *<input name="name" maxlength="24" required></label>
       <label>Player / Discord name<input name="player" maxlength="32"></label>
+      <label>Race *<select name="race" required></select></label>
       <label>Class *<select name="cls" required></select></label>
       <label>Spec<select name="spec"></select></label>
       <label>Role *<select name="role" required><option>Tank</option><option>Healer</option><option selected>DPS</option></select></label>
-      <label>Race *<select name="race" required></select></label>
       <label>Profession 1<select name="prof1"></select></label>
       <label>Profession 2<select name="prof2"></select></label>
+      <div class="full"><span class="lbl">Secondary professions</span>
+        <div class="checks" id="secChecks"></div></div>
       <label class="full">Level<input name="level" type="number" min="1" max="90" placeholder="Optional"></label>
     </div>
     <div class="dlg-f">
@@ -174,22 +172,27 @@ label{display:grid;gap:5px;font-size:13px;color:var(--muted)}
 <script>
 const API = "/api/roster";
 const CLASSES = {
-  "Death Knight":{c:"#C41E3A",s:{Blood:"Tank",Frost:"DPS",Unholy:"DPS"}},
-  "Demon Hunter":{c:"#A330C9",s:{Havoc:"DPS",Vengeance:"Tank"}},
-  "Druid":{c:"#FF7C0A",s:{Balance:"DPS",Feral:"DPS",Guardian:"Tank",Restoration:"Healer"}},
-  "Evoker":{c:"#33937F",s:{Devastation:"DPS",Preservation:"Healer",Augmentation:"DPS"}},
+  "Druid":{c:"#FF7C0A",s:{Balance:"DPS",Feral:"DPS",Restoration:"Healer"}},
   "Hunter":{c:"#AAD372",s:{"Beast Mastery":"DPS",Marksmanship:"DPS",Survival:"DPS"}},
   "Mage":{c:"#3FC7EB",s:{Arcane:"DPS",Fire:"DPS",Frost:"DPS"}},
-  "Monk":{c:"#00FF98",s:{Brewmaster:"Tank",Mistweaver:"Healer",Windwalker:"DPS"}},
   "Paladin":{c:"#F48CBA",s:{Holy:"Healer",Protection:"Tank",Retribution:"DPS"}},
   "Priest":{c:"#FFFFFF",s:{Discipline:"Healer",Holy:"Healer",Shadow:"DPS"}},
-  "Rogue":{c:"#FFF468",s:{Assassination:"DPS",Outlaw:"DPS",Subtlety:"DPS"}},
+  "Rogue":{c:"#FFF468",s:{Assassination:"DPS",Combat:"DPS",Subtlety:"DPS"}},
   "Shaman":{c:"#0070DD",s:{Elemental:"DPS",Enhancement:"DPS",Restoration:"Healer"}},
   "Warlock":{c:"#8788EE",s:{Affliction:"DPS",Demonology:"DPS",Destruction:"DPS"}},
   "Warrior":{c:"#C69B6D",s:{Arms:"DPS",Fury:"DPS",Protection:"Tank"}},
 };
-const RACES = ["Human","Dwarf","Night Elf","Gnome","Draenei","Worgen","Pandaren","Dracthyr","Void Elf","Lightforged Draenei","Dark Iron Dwarf","Kul Tiran","Mechagnome","Earthen"];
-const PROFS = ["Alchemy","Blacksmithing","Enchanting","Engineering","Herbalism","Inscription","Jewelcrafting","Leatherworking","Mining","Skinning","Tailoring"];
+// WoW Forever Alliance race/class combinations
+const RACE_CLASSES = {
+  "Human":["Hunter","Mage","Paladin","Priest","Rogue","Warlock","Warrior"],
+  "Dwarf":["Hunter","Paladin","Priest","Rogue","Shaman","Warrior"],
+  "Night Elf":["Druid","Hunter","Priest","Rogue","Warrior"],
+  "Gnome":["Mage","Priest","Rogue","Warlock","Warrior"],
+  "High Order Skyborne":["Druid","Hunter","Mage","Rogue","Warrior"],
+};
+const RACES = Object.keys(RACE_CLASSES);
+const PROFS = ["Alchemy","Blacksmithing","Enchanting","Engineering","Herbalism","Leatherworking","Mining","Skinning","Tailoring"];
+const SECONDARY = ["Cooking","First Aid","Fishing"];
 
 let roster = [], editingId = null, sortKey = "name", sortDir = 1;
 const F = { q:"", cls:"", role:"", prof:"", race:"" };
@@ -210,11 +213,19 @@ const opt = (v, sel) => `<option ${v===sel?"selected":""}>${esc(v)}</option>`;
 // Populate selects
 const clsNames = Object.keys(CLASSES).sort();
 $("fClass").innerHTML += clsNames.map(c=>opt(c)).join("");
-$("fProf").innerHTML += PROFS.map(p=>opt(p)).join("");
+$("fProf").innerHTML += [...PROFS,...SECONDARY].map(p=>opt(p)).join("");
+const hasProf = (c,p) => c.prof1===p || c.prof2===p || (c.secondary||[]).includes(p);
 const f = $("form");
-f.cls.innerHTML = clsNames.map(c=>opt(c)).join("");
 f.race.innerHTML = RACES.map(r=>opt(r)).join("");
 f.prof1.innerHTML = f.prof2.innerHTML = ["None",...PROFS].map(p=>opt(p)).join("");
+$("secChecks").innerHTML = SECONDARY.map(p=>`<label><input type="checkbox" name="secondary" value="${p}">${p}</label>`).join("");
+// Only show the classes this race can play in WoW Forever
+function fillClasses(cls, spec){
+  const allowed = RACE_CLASSES[f.race.value];
+  f.cls.innerHTML = allowed.map(c=>opt(c, cls)).join("");
+  fillSpecs(spec);
+}
+f.race.onchange = () => fillClasses(f.cls.value);
 function fillSpecs(spec){
   const specs = Object.keys(CLASSES[f.cls.value].s);
   f.spec.innerHTML = specs.map(s=>opt(s, spec)).join("");
@@ -252,8 +263,8 @@ function render(){
   const raceCounts = RACES.map(r=>[r, roster.filter(x=>x.race===r).length]).sort((a,b)=>b[1]-a[1]);
   $("raceChips").innerHTML = raceCounts.map(([r,n])=>`<span class="chip ${F.race===r?"active":""}" data-race="${esc(r)}">${esc(r)}<b>${n}</b></span>`).join("");
 
-  $("profGrid").innerHTML = PROFS.map(p=>{
-    const who = roster.filter(x=>x.prof1===p||x.prof2===p);
+  $("profGrid").innerHTML = [...PROFS,...SECONDARY].map(p=>{
+    const who = roster.filter(x=>hasProf(x,p));
     return `<div class="prof ${who.length?"":"gap"} ${F.prof===p?"active":""}" data-prof="${esc(p)}" title="${esc(who.map(w=>w.name).join(", "))}">
       <div class="t">${esc(p)}<span>${who.length}</span></div>
       <div class="w">${who.length ? esc(who.map(w=>w.name).join(", ")) : "Nobody yet – wanted!"}</div></div>`;
@@ -263,18 +274,19 @@ function render(){
   let list = roster.filter(c =>
     (!q || c.name.toLowerCase().includes(q) || (c.player||"").toLowerCase().includes(q)) &&
     (!F.cls || c.cls===F.cls) && (!F.role || c.role===F.role) && (!F.race || c.race===F.race) &&
-    (!F.prof || c.prof1===F.prof || c.prof2===F.prof));
+    (!F.prof || hasProf(c,F.prof)));
   list.sort((a,b)=> String(a[sortKey]??"").localeCompare(String(b[sortKey]??""), "en", {numeric:true}) * sortDir);
 
   $("rows").innerHTML = list.length ? list.map(c=>{
     const mine = !!tokens[c.id], canEdit = mine || officerPin;
-    const profs = [c.prof1,c.prof2].filter(p=>p&&p!=="None").join(" · ") || "–";
+    const profs = esc([c.prof1,c.prof2].filter(p=>p&&p!=="None").join(" · ") || "–")
+      + ((c.secondary||[]).length ? ` <span class="sec">+ ${esc(c.secondary.join(", "))}</span>` : "");
     const col = CLASSES[c.cls]?.c || "#fff";
     return `<tr>
       <td class="cname" style="color:${col}">${esc(c.name)}${mine?'<span class="mine">YOU</span>':""}</td>
       <td>${esc(c.player)||"–"}</td><td style="color:${col}">${esc(c.cls)}</td><td>${esc(c.spec)||"–"}</td>
       <td><span class="role ${esc(c.role)}">${esc(c.role)}</span></td><td>${esc(c.race)}</td><td>${c.level??"–"}</td>
-      <td>${esc(profs)}</td>
+      <td>${profs}</td>
       <td>${canEdit?`<button class="small ghost" data-edit="${c.id}">Edit</button> <button class="small ghost danger" data-del="${c.id}">Remove</button>`:""}</td></tr>`;
   }).join("") : `<tr><td colspan="9" class="empty">${roster.length?"No characters match those filters.":"No one's signed up yet – be the first to join the roster!"}</td></tr>`;
 
@@ -302,9 +314,10 @@ function openForm(c){
   $("err").textContent = "";
   f.reset();
   f.name.value = c?.name || ""; f.player.value = c?.player || store.get("gbwg-player","");
-  f.cls.value = c?.cls || "Warrior"; fillSpecs(c?.spec);
+  f.race.value = RACES.includes(c?.race) ? c.race : "Human";
+  fillClasses(c?.cls, c?.spec);
   if (c) f.role.value = c.role;
-  f.race.value = c?.race || "Human";
+  f.querySelectorAll('[name=secondary]').forEach(cb => cb.checked = (c?.secondary||[]).includes(cb.value));
   f.prof1.value = c?.prof1 || "None"; f.prof2.value = c?.prof2 || "None";
   f.level.value = c?.level ?? "";
   $("dlg").showModal(); f.name.focus();
@@ -313,7 +326,9 @@ $("addBtn").onclick = () => openForm();
 $("cancelBtn").onclick = () => $("dlg").close();
 f.onsubmit = async (e) => {
   e.preventDefault();
-  const data = Object.fromEntries(new FormData(f));
+  const fd = new FormData(f);
+  const data = Object.fromEntries(fd);
+  data.secondary = fd.getAll("secondary");
   if (editingId) Object.assign(data, { id: editingId, token: tokens[editingId], pin: officerPin });
   $("saveBtn").disabled = true; $("err").textContent = "";
   try {
