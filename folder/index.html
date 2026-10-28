@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Great British Warcraft Guild – Roster</title>
+<link rel="icon" href="logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a1220; --panel:#111c30; --panel2:#16243d; --line:#24375a; --line2:#1a2a46;
+  --gold:#e6b84a; --gold2:#f5d98a; --text:#e8edf6; --muted:#8fa0bd; --red:#e2555c; --ok:#3fbf7f;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -200px,#1b3566 0%,var(--bg) 60%) fixed;color:var(--text);font:15px/1.5 Inter,system-ui,sans-serif}
+a{color:var(--gold2)}
+h2,h3{font-family:Cinzel,serif;color:var(--gold2);letter-spacing:.4px;margin:0}
+h2{font-size:17px;margin-bottom:12px}
+h3{font-size:20px}
+svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+[hidden]{display:none!important}
+.muted{color:var(--muted)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 16px 60px}
+
+header{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:22px 0 20px;border-bottom:1px solid var(--line);margin-bottom:20px}
+.logo{width:clamp(170px,28vw,250px);height:auto;filter:drop-shadow(0 8px 28px rgba(230,184,74,.25)) drop-shadow(0 2px 6px rgba(0,0,0,.6))}
+.sub{color:var(--muted);margin:0;font-size:15px}
+.sub b{color:#6fa2ff}
+.hdr-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+
+button,.btn{font:inherit;cursor:pointer;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:9px 15px;display:inline-flex;align-items:center;justify-content:center;gap:7px;line-height:1.3}
+button:hover{border-color:var(--gold)}
+button:disabled{opacity:.55;cursor:wait}
+.primary{background:linear-gradient(180deg,#f0c75a,#c9952b);color:#1a1205;border-color:#f5d98a;font-weight:600}
+.primary:hover{filter:brightness(1.08)}
+.ghost{background:transparent}
+.danger{color:#ffb3b7;border-color:#5a2730}
+.danger:hover{border-color:var(--red)}
+.danger-solid{background:#a8303a;border-color:#d0505a;color:#fff;font-weight:600}
+.small{padding:5px 10px;font-size:13px}
+.row{display:flex;gap:8px;align-items:center}
+.row.wrapr{flex-wrap:wrap}
+.row.end{justify-content:flex-end}
+.spacer{flex:1}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+.notice{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:linear-gradient(120deg,rgba(42,99,196,.22),rgba(230,184,74,.08)),var(--panel);border:1px solid #2b4f86;border-radius:12px;padding:12px 14px 12px 16px;margin-bottom:16px}
+.notice p{margin:0;flex:1;min-width:220px}
+.notice b{color:var(--gold2)}
+.iconx{border:0;background:transparent;color:var(--muted);font-size:22px;line-height:1;padding:2px 6px}
+.iconx:hover{color:var(--text)}
+.mine{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.mine .lbl{color:var(--muted);font-size:13.5px;margin-right:2px}
+.mine button{border-radius:999px;padding:5px 12px;font-size:13.5px}
+
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-align:left;display:block;width:100%}
+.stat .n{font-family:Cinzel,serif;font-size:30px;font-weight:800;color:var(--gold2);line-height:1.1}
+.stat .l{color:var(--muted);font-size:12.5px;text-transform:uppercase;letter-spacing:.8px}
+.stat:hover .l{color:var(--text)}
+.grid{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;margin-bottom:16px}
+.col{display:grid;gap:16px;align-content:start}
+.bars{display:grid;gap:3px}
+.bar{display:grid;grid-template-columns:120px 1fr 28px;align-items:center;gap:10px;font-size:14px;background:transparent;border:0;padding:5px 6px;border-radius:8px;text-align:left;width:100%}
+.bar:hover{background:rgba(255,255,255,.05)}
+.bar .track{height:14px;background:#0c1527;border-radius:7px;overflow:hidden}
+.bar .fill{display:block;height:100%;border-radius:7px;transition:width .4s}
+.bar .c{text-align:right;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13.5px}
+.chip b{color:var(--gold2);margin-left:6px}
+.profs{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:8px}
+.prof{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 12px;text-align:left;display:block;width:100%}
+.prof .t{display:flex;justify-content:space-between;font-weight:600}
+.prof .t span{color:var(--gold2)}
+.prof .w{color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prof.gap{border-style:dashed;opacity:.75}
+.prof.gap .w{color:#ff9aa0}
+.prof.sec{background:#132036}
+
+.feed{display:grid;gap:4px}
+.fi{display:grid;grid-template-columns:24px 1fr auto;gap:8px;align-items:center;padding:7px 8px;border-radius:8px;text-align:left;background:transparent;border:0;width:100%;font-size:14px}
+.fi:hover{background:rgba(255,255,255,.04)}
+.fi .ic{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#0c1527;border:1px solid var(--line);color:var(--gold)}
+.fi .ic svg{width:13px;height:13px}
+.fi .tx{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.fi .old{color:var(--muted);text-decoration:line-through}
+.fi .when{color:var(--muted);font-size:12.5px;white-space:nowrap;display:flex;gap:6px;align-items:center}
+.tag{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;border:1px solid var(--line);border-radius:999px;padding:1px 7px;color:var(--muted)}
+.more{margin-top:8px}
+
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.toolbar input,.toolbar select{flex:1;min-width:150px;width:auto}
+input,select,textarea{font:inherit;background:#0c1527;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:9px 11px;width:100%}
+input:focus,select:focus{outline:none;border-color:var(--gold)}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;color:var(--muted);font-weight:500;font-size:12.5px;text-transform:uppercase;letter-spacing:.6px;padding:8px 10px;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap;user-select:none}
+th.sorted{color:var(--gold2)}
+td{padding:9px 10px;border-bottom:1px solid var(--line2);white-space:nowrap}
+tbody tr{cursor:pointer}
+tbody tr:hover td{background:#132140}
+.c-meta{display:none}
+.cname{font-weight:600}
+.was{display:block;font-size:12px;font-weight:400;color:var(--muted)}
+.you{font-size:10.5px;color:var(--gold);margin-left:6px;letter-spacing:.5px}
+.plink{cursor:pointer;border-bottom:1px dotted var(--muted)}
+.plink:hover{color:var(--gold2)}
+.role{display:inline-block;font-size:12px;padding:2px 8px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+.role.Tank{color:#8fc1ff;border-color:#2b4f86}.role.Healer{color:#7fe0a8;border-color:#2a6b4b}.role.DPS{color:#ff9f8f;border-color:#7a3a33}
+.sec-p{color:var(--muted);font-size:12.5px}
+.empty{text-align:center;color:var(--muted);padding:36px 10px}
+.status{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.editbtn{padding:4px 10px;font-size:13px;background:transparent}
+
+dialog{background:var(--panel);color:var(--text);border:1px solid var(--gold);border-radius:16px;padding:22px;width:min(560px,94vw);max-height:90vh;overflow:auto}
+dialog.wide{width:min(720px,94vw)}
+dialog.small{width:min(420px,92vw)}
+dialog::backdrop{background:rgba(3,7,15,.78)}
+dialog:focus{outline:none}
+.x{position:absolute;top:12px;right:12px;border:0;background:transparent;font-size:24px;line-height:1;color:var(--muted);padding:4px 8px}
+.x:hover{color:var(--text)}
+dialog h3{margin:0 0 14px;padding-right:30px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.full{grid-column:1/-1}
+label{display:grid;gap:5px;font-size:13px;color:var(--muted)}
+.lbl{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+.checks{display:flex;gap:8px;flex-wrap:wrap}
+.checks label{display:flex;align-items:center;gap:8px;background:#0c1527;border:1px solid var(--line);border-radius:9px;padding:8px 12px;color:var(--text);cursor:pointer;font-size:14px}
+.checks input{width:auto;accent-color:var(--gold)}
+.err{color:#ff9aa0;font-size:13.5px;min-height:1em;margin:10px 0 0}
+.hint{background:rgba(42,99,196,.12);border:1px solid #2b4f86;color:#cfe0ff;border-radius:10px;padding:10px 12px;font-size:13.5px;margin:0 0 14px}
+.hint.warn{background:rgba(230,184,74,.1);border-color:#7a5a12;color:var(--gold2)}
+form .row.end{margin-top:16px}
+.mlist{display:grid;gap:6px}
+.mrow{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:center;text-align:left;padding:10px 12px;background:var(--panel2);width:100%}
+.mrow .who b{display:block}
+.mrow .who span{color:var(--muted);font-size:13px}
+.avatar{border-radius:50%;display:grid;place-items:center;font-family:Cinzel,serif;font-weight:800;color:#0a1220;background:var(--c,#8fa0bd);box-shadow:0 0 0 2px var(--gold);flex:none;width:34px;height:34px;font-size:15px}
+.phead{display:flex;gap:14px;align-items:center;margin-bottom:14px}
+.phead .avatar{width:56px;height:56px;font-size:24px}
+.phead h3{margin:0;padding:0}
+.formerly{font-size:13px;color:var(--muted);margin-top:2px}
+.formerly b{color:var(--text);font-weight:500}
+dl.facts{display:grid;grid-template-columns:130px 1fr;gap:8px 14px;margin:0 0 16px}
+dl.facts dt{color:var(--muted);font-size:13px}
+dl.facts dd{margin:0}
+.hist{border-top:1px solid var(--line);padding-top:12px;margin-bottom:16px}
+.hist h4{margin:0 0 6px;font-size:12.5px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);font-weight:500}
+.hist .fi{cursor:default}
+.seg{display:inline-flex;background:#0c1527;border:1px solid var(--line);border-radius:10px;padding:3px;gap:3px;margin-bottom:12px;flex-wrap:wrap}
+.seg button{border:0;background:transparent;padding:6px 12px;border-radius:7px;color:var(--muted);font-size:13.5px}
+.seg button.on{background:var(--panel2);color:var(--gold2)}
+#confirm p{margin:0 0 6px}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--panel2);border:1px solid var(--gold);padding:11px 18px;border-radius:10px;opacity:0;transition:.25s;pointer-events:none;z-index:100;max-width:90vw}
+.toast.show{opacity:1;transform:translateX(-50%)}
+.toast.bad{border-color:var(--red)}
+
+@media (max-width:900px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .toolbar input{flex-basis:100%}
+  .stats .stat:first-child{grid-column:1/-1}
+  .fgrid{grid-template-columns:1fr}
+  .bar{grid-template-columns:96px 1fr 24px}
+  dl.facts{grid-template-columns:100px 1fr}
+  dialog{padding:18px}
+  /* roster table becomes cards */
+  table,tbody{display:block}
+  thead{display:none}
+  tbody tr{display:grid;grid-template-columns:1fr auto;gap:3px 10px;padding:12px 4px;border-bottom:1px solid var(--line2)}
+  tbody tr:hover td{background:transparent}
+  td{display:block;padding:0;border:0;white-space:normal}
+  .c-player,.c-class,.c-spec,.c-race,.c-lvl{display:none}
+  .c-name{grid-column:1;grid-row:1}
+  .c-role{grid-column:2;grid-row:1;justify-self:end}
+  .c-meta{display:block;grid-column:1/-1;grid-row:2;color:var(--muted);font-size:13px}
+  .c-prof{grid-column:1;grid-row:3;font-size:13px;align-self:center}
+  .c-edit{grid-column:2;grid-row:3;justify-self:end}
+  td.empty{grid-column:1/-1}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img class="logo" src="logo.webp" alt="The Great British Warcraft Guild crest" width="513" height="520">
+    <p class="sub"><b>For the Alliance!</b> · WoW Forever guild roster</p>
+    <div class="hdr-actions">
+      <button class="ghost" id="officerBtn" data-act="officer">Officer login</button>
+      <button class="primary" data-act="add">+ Add your character</button>
+    </div>
+  </header>
+
+  <div class="notice" id="notice" hidden>
+    <p><b>New server names are live!</b> If your name changed, find your character and click <b>Edit</b>. Your old name stays searchable, so guildies can still find you.</p>
+    <button class="small" data-act="findMe">Find my character</button>
+    <button class="iconx" data-act="dismissNotice" aria-label="Hide this message">×</button>
+  </div>
+  <div class="mine" id="mine" hidden></div>
+
+  <section class="stats" id="stats"></section>
+
+  <section class="grid">
+    <div class="card"><h2>Classes</h2><div class="bars" id="classBars"></div></div>
+    <div class="col">
+      <div class="card"><h2>Races</h2><div class="chips" id="raceChips"></div></div>
+      <div class="card"><h2>Recent changes</h2><div class="feed" id="recent"></div></div>
+    </div>
+  </section>
+
+  <section class="card" style="margin-bottom:16px">
+    <h2>Profession coverage</h2>
+    <div class="profs" id="profGrid"></div>
+  </section>
+
+  <section class="card" id="rosterCard">
+    <h2>Guild roster</h2>
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="Search name, old name or player…" aria-label="Search">
+      <select id="fClass" aria-label="Class"><option value="">All classes</option></select>
+      <select id="fRole" aria-label="Role"><option value="">All roles</option><option>Tank</option><option>Healer</option><option>DPS</option></select>
+      <select id="fProf" aria-label="Profession"><option value="">All professions</option></select>
+      <button class="ghost small" data-act="clear">Clear</button>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr>
+          <th data-k="name">Character</th><th data-k="player">Player</th><th data-k="cls">Class</th><th data-k="spec">Spec</th>
+          <th data-k="role">Role</th><th data-k="race">Race</th><th data-k="level">Lvl</th><th data-k="prof1">Professions</th><th></th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p class="status" id="status">Loading roster…</p>
+  </section>
+</div>
+
+<dialog id="modal" tabindex="-1"></dialog>
+<dialog id="confirm" class="small"></dialog>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+"use strict";
+const API = "/api/roster";
+// ---------- WoW Forever data (Alliance) ----------
+const CLASSES = {
+  Druid:   { c: "#FF7C0A", s: { Balance: "DPS", Feral: "DPS", Restoration: "Healer" } },
+  Hunter:  { c: "#AAD372", s: { "Beast Mastery": "DPS", Marksmanship: "DPS", Survival: "DPS" } },
+  Mage:    { c: "#3FC7EB", s: { Arcane: "DPS", Fire: "DPS", Frost: "DPS" } },
+  Paladin: { c: "#F48CBA", s: { Holy: "Healer", Protection: "Tank", Retribution: "DPS" } },
+  Priest:  { c: "#FFFFFF", s: { Discipline: "Healer", Holy: "Healer", Shadow: "DPS" } },
+  Rogue:   { c: "#FFF468", s: { Assassination: "DPS", Combat: "DPS", Subtlety: "DPS" } },
+  Shaman:  { c: "#0070DD", s: { Elemental: "DPS", Enhancement: "DPS", Restoration: "Healer" } },
+  Warlock: { c: "#8788EE", s: { Affliction: "DPS", Demonology: "DPS", Destruction: "DPS" } },
+  Warrior: { c: "#C69B6D", s: { Arms: "DPS", Fury: "DPS", Protection: "Tank" } },
+};
+const RACE_CLASSES = {
+  "Human": ["Hunter", "Mage", "Paladin", "Priest", "Rogue", "Warlock", "Warrior"],
+  "Dwarf": ["Hunter", "Paladin", "Priest", "Rogue", "Shaman", "Warrior"],
+  "Night Elf": ["Druid", "Hunter", "Priest", "Rogue", "Warrior"],
+  "Gnome": ["Mage", "Priest", "Rogue", "Warlock", "Warrior"],
+  "High Order Skyborne": ["Druid", "Hunter", "Mage", "Rogue", "Warrior"],
+};
+const RACES = Object.keys(RACE_CLASSES);
+const CLASS_NAMES = Object.keys(CLASSES);
+const PROFS = ["Alchemy", "Blacksmithing", "Enchanting", "Engineering", "Herbalism", "Leatherworking", "Mining", "Skinning", "Tailoring"];
+const SECONDARY = ["Cooking", "First Aid", "Fishing"];
+const ROLES = ["Tank", "Healer", "DPS"];
+const LABELS = { name: "name", player: "player name", race: "race", cls: "class", spec: "spec", role: "role", prof1: "professions", prof2: "professions", secondary: "secondary professions", level: "level" };
+
+// ---------- state & helpers ----------
+const S = { chars: [], loaded: false };
+const UI = { f: { q: "", cls: "", role: "", prof: "" }, sortKey: "name", sortDir: 1, feed: "all" };
+const $ = (id) => document.getElementById(id);
+const el = (form, name) => form.elements[name];
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+const opt = (v, sel) => `<option value="${esc(v)}" ${v === sel ? "selected" : ""}>${esc(v)}</option>`;
+const col = (cls) => CLASSES[cls]?.c || "#c9d3e6";
+const norm = (s) => String(s ?? "").trim().toLowerCase();
+const byId = (id) => S.chars.find((c) => c.id === id);
+const plural = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
+const roleWord = (r) => (r === "DPS" ? "DPS" : r + "s");
+const hasProf = (c, p) => c.prof1 === p || c.prof2 === p || (c.secondary || []).includes(p);
+const avatar = (c, size = 34) => `<span class="avatar" style="--c:${col(c.cls)};width:${size}px;height:${size}px;font-size:${Math.round(size * 0.44)}px">${esc((c.name || "?")[0])}</span>`;
+const fmtDate = (ts) => new Date(ts).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+function timeAgo(ts) {
+  const s = (Date.now() - ts) / 1000;
+  if (s < 60) return "just now";
+  if (s < 3600) return plural(Math.floor(s / 60), "min") + " ago";
+  if (s < 86400) return plural(Math.floor(s / 3600), "hour") + " ago";
+  if (s < 172800) return "yesterday";
+  if (s < 30 * 86400) return Math.floor(s / 86400) + " days ago";
+  return fmtDate(ts);
+}
+function profText(c) {
+  const p = [c.prof1, c.prof2].filter((x) => x && x !== "None");
+  const sec = c.secondary || [];
+  return (esc(p.join(" · ")) || "–") + (sec.length ? ` <span class="sec-p">+ ${esc(sec.join(", "))}</span>` : "");
+}
+const ICON = {
+  rename: '<svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
+  edit: '<svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></svg>',
+  joined: '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
+  undo: '<svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>',
+  pencil: '<svg viewBox="0 0 24 24"><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
+};
+
+// Browser storage (kept compatible with the previous version, so "YOU" badges carry over)
+const store = {
+  get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+};
+let tokens = store.get("gbwg-tokens", {});
+let officerPin = (() => { try { return sessionStorage.getItem("gbwg-pin") || ""; } catch { return ""; } })();
+const isMine = (c) => !!tokens[c.id];
+
+function toast(msg, bad) {
+  const t = $("toast");
+  t.textContent = msg;
+  t.classList.toggle("bad", !!bad);
+  t.classList.add("show");
+  clearTimeout(t._h);
+  t._h = setTimeout(() => t.classList.remove("show"), 3200);
+}
+async function send(method, body) {
+  let r;
+  try { r = await fetch(API, { method, headers: { "content-type": "application/json" }, body: JSON.stringify(body) }); }
+  catch { throw new Error("Couldn't reach the roster. Check your connection."); }
+  const out = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(out.error || "Something went wrong.");
+  return out;
+}
+
+// ---------- loading ----------
+let loadSeq = 0;
+async function load() {
+  const seq = ++loadSeq;
+  try {
+    const r = await fetch(API, { cache: "no-store" });
+    if (!r.ok) throw new Error();
+    const data = await r.json();
+    if (seq !== loadSeq) return;
+    S.chars = data;
+    S.loaded = true;
+    // forget "mine" tokens for characters that no longer exist
+    const ids = new Set(data.map((c) => c.id));
+    let pruned = false;
+    for (const id of Object.keys(tokens)) if (!ids.has(id)) { delete tokens[id]; pruned = true; }
+    if (pruned) store.set("gbwg-tokens", tokens);
+    $("status").textContent = `Last updated ${new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })} · refreshes automatically`;
+    render();
+  } catch {
+    if (seq === loadSeq) $("status").textContent = "Couldn't reach the roster right now – it will try again shortly.";
+  }
+}
+
+// ---------- page ----------
+function render() {
+  renderTop();
+  renderStats();
+  renderClasses();
+  renderRaces();
+  renderRecent();
+  renderProfs();
+  drawTable();
+}
+function renderTop() {
+  $("officerBtn").textContent = officerPin ? "Officer mode ✓ (log out)" : "Officer login";
+  $("notice").hidden = !!store.get("gbwg-notice-names", false);
+  const mine = S.chars.filter(isMine);
+  $("mine").hidden = !mine.length;
+  $("mine").innerHTML = `<span class="lbl">Your characters on this device:</span>${mine.map((c) => `<button data-act="edit" data-id="${c.id}" style="color:${col(c.cls)}" title="Edit ${esc(c.name)}">${ICON.pencil}${esc(c.name)}</button>`).join("")}`;
+}
+function renderStats() {
+  const C = S.chars;
+  const players = new Set(C.map((c) => norm(c.player)).filter(Boolean)).size;
+  const n = (r) => C.filter((c) => c.role === r).length;
+  $("stats").innerHTML = [["Characters", C.length, "all"], ["Players", players, "players"], ["Tanks", n("Tank"), "Tank"], ["Healers", n("Healer"), "Healer"], ["DPS", n("DPS"), "DPS"]]
+    .map(([l, v, k]) => `<button class="stat" data-act="stat" data-k="${k}"><div class="n">${v}</div><div class="l">${l}</div></button>`).join("");
+}
+function renderClasses() {
+  const C = S.chars;
+  const classes = [...CLASS_NAMES, ...new Set(C.map((c) => c.cls).filter((x) => x && !CLASSES[x]))];
+  const max = Math.max(1, ...classes.map((k) => C.filter((c) => c.cls === k).length));
+  $("classBars").innerHTML = classes.map((k) => {
+    const n = C.filter((c) => c.cls === k).length;
+    return `<button class="bar" data-act="cls" data-v="${esc(k)}"><span style="color:${col(k)}">${esc(k)}</span><span class="track"><span class="fill" style="width:${(n / max) * 100}%;background:${col(k)}"></span></span><span class="c">${n}</span></button>`;
+  }).join("");
+}
+function renderRaces() {
+  const C = S.chars;
+  const races = [...RACES, ...new Set(C.map((c) => c.race).filter((r) => r && !RACE_CLASSES[r]))]
+    .map((r) => [r, C.filter((c) => c.race === r).length]).sort((a, b) => b[1] - a[1]);
+  $("raceChips").innerHTML = races.map(([r, n]) => `<button class="chip" data-act="race" data-v="${esc(r)}">${esc(r)}<b>${n}</b></button>`).join("");
+}
+function renderProfs() {
+  $("profGrid").innerHTML = [...PROFS, ...SECONDARY].map((p) => {
+    const who = S.chars.filter((c) => hasProf(c, p));
+    return `<button class="prof ${who.length ? "" : "gap"} ${SECONDARY.includes(p) ? "sec" : ""}" data-act="prof" data-v="${esc(p)}">
+      <div class="t">${esc(p)}<span>${who.length}</span></div>
+      <div class="w">${who.length ? esc(who.map((w) => w.name).join(", ")) : "Nobody yet – wanted!"}</div></button>`;
+  }).join("");
+}
+
+// ---------- recent changes ----------
+const latestUndoable = (c) => [...(c.history || [])].reverse().find((h) => !h.undo && !h.undone);
+function activity() {
+  const items = [];
+  for (const c of S.chars) {
+    if (c.joined) items.push({ at: c.joined, type: "joined", c });
+    for (const h of c.history || []) items.push({ at: h.at, type: h.undo ? "undo" : h.changes?.name ? "rename" : "edit", h, c });
+  }
+  return items.sort((a, b) => b.at - a.at);
+}
+function changedLabels(changes, skip) {
+  return [...new Set(Object.keys(changes || {}).filter((k) => k !== skip).map((k) => LABELS[k] || k))];
+}
+function describe(it) {
+  const name = `<b style="color:${col(it.c.cls)}">${esc(it.c.name)}</b>`;
+  if (it.type === "joined") return `${name} joined the roster`;
+  if (it.type === "undo") return `An officer undid a change to ${name}`;
+  if (it.type === "rename") {
+    const [from, to] = it.h.changes.name;
+    const rest = changedLabels(it.h.changes, "name");
+    return `<span class="old">${esc(from)}</span> is now <b style="color:${col(it.c.cls)}">${esc(to)}</b>${rest.length ? ` <span class="muted">· also updated ${esc(rest.join(", "))}</span>` : ""}${it.h.undone ? ' <span class="tag">undone</span>' : ""}`;
+  }
+  return `${name} updated ${esc(changedLabels(it.h.changes).join(", "))}${it.h.undone ? ' <span class="tag">undone</span>' : ""}`;
+}
+const BY = { owner: "owner", officer: "officer", member: "other device" };
+function feedItem(it, { inProfile = false } = {}) {
+  const undoable = officerPin && it.h && !it.h.undo && latestUndoable(it.c) === it.h;
+  const tag = officerPin && it.h && !it.h.undo && it.h.by ? `<span class="tag">${BY[it.h.by] || it.h.by}</span>` : "";
+  const inner = `<span class="ic">${ICON[it.type]}</span><span class="tx">${describe(it)}</span>
+    <span class="when">${tag}${timeAgo(it.at)}${undoable ? `<button class="small ghost" data-act="undo" data-id="${it.c.id}" data-at="${it.h.at}">Undo</button>` : ""}</span>`;
+  return inProfile ? `<div class="fi">${inner}</div>` : `<div class="fi" role="button" tabindex="0" data-act="profile" data-id="${it.c.id}" style="cursor:pointer">${inner}</div>`;
+}
+function renderRecent() {
+  const items = activity();
+  $("recent").innerHTML = items.length
+    ? items.slice(0, 7).map((it) => feedItem(it)).join("") + (items.length > 7 ? `<button class="ghost small more" data-act="allChanges">See all changes</button>` : "")
+    : `<p class="muted" style="margin:0">Nothing yet.</p>`;
+}
+function openAllChanges() {
+  const items = activity();
+  const groups = { all: "All", rename: "Name changes", joined: "New characters", edit: "Other edits" };
+  const list = UI.feed === "all" ? items : items.filter((it) => it.type === UI.feed || (UI.feed === "edit" && it.type === "undo"));
+  openModal(`<h3>Recent changes</h3>
+    <div class="seg">${Object.entries(groups).map(([k, l]) => `<button class="${UI.feed === k ? "on" : ""}" data-act="feedFilter" data-v="${k}">${l}</button>`).join("")}</div>
+    <div class="feed">${list.length ? list.slice(0, 80).map((it) => feedItem(it)).join("") : `<p class="muted">Nothing here yet.</p>`}</div>`, { wide: true });
+}
+
+// ---------- roster table ----------
+function drawTable() {
+  const q = norm(UI.f.q), f = UI.f, k = UI.sortKey;
+  const list = S.chars.filter((c) =>
+    (!q || norm(c.name).includes(q) || norm(c.player).includes(q) || (c.formerNames || []).some((n) => norm(n).includes(q))) &&
+    (!f.cls || c.cls === f.cls) && (!f.role || c.role === f.role) && (!f.prof || hasProf(c, f.prof)));
+  list.sort((a, b) => String(a[k] ?? "").localeCompare(String(b[k] ?? ""), "en", { numeric: true }) * UI.sortDir);
+  document.querySelectorAll("th[data-k]").forEach((th) => th.classList.toggle("sorted", th.dataset.k === k));
+  $("rows").innerHTML = list.length ? list.map((c) => {
+    const former = c.formerNames || [];
+    const matchedOld = q && !norm(c.name).includes(q) ? former.find((n) => norm(n).includes(q)) : null;
+    const recent = former.length && c.renamedAt && Date.now() - c.renamedAt < 30 * 864e5 ? former[former.length - 1] : null;
+    const was = matchedOld || recent;
+    return `<tr data-act="profile" data-id="${c.id}">
+      <td class="c-name cname" style="color:${col(c.cls)}">${esc(c.name)}${isMine(c) ? '<span class="you">YOU</span>' : ""}${was ? `<span class="was">was ${esc(was)}</span>` : ""}</td>
+      <td class="c-player">${c.player ? `<span class="plink" data-act="player" data-v="${esc(c.player)}">${esc(c.player)}</span>` : "–"}</td>
+      <td class="c-class" style="color:${col(c.cls)}">${esc(c.cls)}</td><td class="c-spec">${esc(c.spec) || "–"}</td>
+      <td class="c-role"><span class="role ${esc(c.role)}">${esc(c.role)}</span></td><td class="c-race">${esc(c.race)}</td><td class="c-lvl">${c.level ?? "–"}</td>
+      <td class="c-meta">${esc([c.spec, c.cls].filter(Boolean).join(" "))} · ${esc(c.race)}${c.level ? ` · Lvl ${c.level}` : ""}${c.player ? ` · ${esc(c.player)}` : ""}</td>
+      <td class="c-prof">${profText(c)}</td>
+      <td class="c-edit"><button class="editbtn" data-act="edit" data-id="${c.id}" aria-label="Edit ${esc(c.name)}">${ICON.pencil} Edit</button></td></tr>`;
+  }).join("") : `<tr><td colspan="9" class="empty">${S.chars.length ? "No characters match that search." : "No one's signed up yet – be the first to join the roster!"}</td></tr>`;
+}
+
+// ---------- dialogs ----------
+const modal = $("modal");
+function openModal(html, { wide, small } = {}) {
+  modal.className = wide ? "wide" : small ? "small" : "";
+  modal.innerHTML = `<button class="x" type="button" data-act="close" aria-label="Close">×</button>${html}`;
+  if (!modal.open) modal.showModal();
+  modal.scrollTop = 0;
+  modal.focus(); // keep the focus ring off the close button
+
+}
+function closeModal() { if (modal.open) modal.close(); }
+modal.addEventListener("click", (e) => { if (e.target === modal && !modal.querySelector("form")) closeModal(); });
+function promptBox(message, { input = false, label = "", type = "text", ok = "OK", danger = false } = {}) {
+  return new Promise((resolve) => {
+    const d = $("confirm");
+    d.innerHTML = `<form><p>${message}</p>${input ? `<label style="margin-top:12px">${esc(label)}<input name="v" type="${type}" autocomplete="off"></label>` : ""}
+      <div class="row end" style="margin-top:18px"><button type="button" class="ghost" data-c="1">Cancel</button><button class="${danger ? "danger-solid" : "primary"}">${esc(ok)}</button></div></form>`;
+    const f = d.querySelector("form");
+    let done = false;
+    const finish = (v) => { if (done) return; done = true; if (d.open) d.close(); resolve(v); };
+    f.querySelector("[data-c]").onclick = () => finish(null);
+    f.onsubmit = (e) => { e.preventDefault(); finish(input ? el(f, "v").value : true); };
+    d.onclose = () => finish(null);
+    d.showModal();
+    (input ? el(f, "v") : f.querySelector("button:last-child")).focus();
+  });
+}
+const confirmBox = (msg, ok, danger = true) => promptBox(msg, { ok, danger }).then((v) => v === true);
+
+// ---------- lists ----------
+function showList(title, list, extra = "") {
+  list = [...list].sort((a, b) => a.name.localeCompare(b.name));
+  openModal(`<h3>${esc(title)} <span class="muted" style="font-family:Inter,sans-serif;font-size:15px">(${list.length})</span></h3>${extra}
+    <div class="mlist">${list.length ? list.map((c) => `<button class="mrow" data-act="profile" data-id="${c.id}">${avatar(c)}
+      <span class="who"><b style="color:${col(c.cls)}">${esc(c.name)}</b><span>${esc([c.spec, c.cls].filter(Boolean).join(" "))} · ${esc(c.race)}${c.player ? ` · ${esc(c.player)}` : ""}</span></span>
+      <span class="role ${esc(c.role)}">${esc(c.role)}</span></button>`).join("") : `<p class="muted">Nobody yet.</p>`}</div>`);
+}
+function listClass(k) {
+  const list = S.chars.filter((c) => c.cls === k);
+  const specs = Object.keys(CLASSES[k]?.s || {});
+  const extra = specs.length && list.length ? `<div class="chips" style="margin-bottom:14px">${specs.map((s) => `<span class="chip">${esc(s)}<b>${list.filter((c) => c.spec === s).length}</b></span>`).join("")}</div>` : "";
+  showList(k + "s", list, extra);
+}
+function listPlayers() {
+  const groups = {};
+  for (const c of S.chars) { const k = norm(c.player); if (k) (groups[k] = groups[k] || { name: c.player, chars: [] }).chars.push(c); }
+  const players = Object.values(groups).sort((a, b) => b.chars.length - a.chars.length || a.name.localeCompare(b.name));
+  openModal(`<h3>Players <span class="muted" style="font-family:Inter,sans-serif;font-size:15px">(${players.length})</span></h3>
+    <div class="mlist">${players.map((p) => `<button class="mrow" data-act="player" data-v="${esc(p.name)}" style="grid-template-columns:1fr auto">
+      <span class="who"><b>${esc(p.name)}</b><span>${p.chars.map((c) => `<span style="color:${col(c.cls)}">${esc(c.name)}</span>`).join(" · ")}</span></span>
+      <span class="muted" style="font-size:13px">${plural(p.chars.length, "character")}</span></button>`).join("")}</div>`);
+}
+function listPlayer(name) {
+  showList(`${name}'s characters`, S.chars.filter((c) => norm(c.player) === norm(name)));
+}
+
+// ---------- profile ----------
+function openProfile(id) {
+  const c = byId(id);
+  if (!c) return;
+  const former = c.formerNames || [];
+  const alts = c.player ? S.chars.filter((x) => x.id !== c.id && norm(x.player) === norm(c.player)) : [];
+  const hist = [...(c.history || [])].reverse().slice(0, 5).map((h) => ({ at: h.at, type: h.undo ? "undo" : h.changes?.name ? "rename" : "edit", h, c }));
+  const canRemove = isMine(c) || officerPin;
+  const undoable = officerPin && latestUndoable(c);
+  openModal(`<div class="phead">${avatar(c, 56)}<div><h3 style="color:${col(c.cls)}">${esc(c.name)}${isMine(c) ? '<span class="you">YOU</span>' : ""}</h3>
+      <div class="muted">${esc(c.race)} ${esc(c.cls)}</div>
+      ${former.length ? `<div class="formerly">Formerly known as <b>${esc([...former].reverse().join(", "))}</b></div>` : ""}</div></div>
+    <dl class="facts">
+      <dt>Spec</dt><dd>${esc(c.spec) || "–"}</dd>
+      <dt>Role</dt><dd><span class="role ${esc(c.role)}">${esc(c.role)}</span></dd>
+      <dt>Level</dt><dd>${c.level ?? "–"}</dd>
+      <dt>Professions</dt><dd>${esc([c.prof1, c.prof2].filter((p) => p && p !== "None").join(" · ")) || "–"}</dd>
+      <dt>Secondary</dt><dd>${esc((c.secondary || []).join(", ")) || "–"}</dd>
+      <dt>Player</dt><dd>${c.player ? `<span class="plink" data-act="player" data-v="${esc(c.player)}">${esc(c.player)}</span>` : "–"}</dd>
+      ${alts.length ? `<dt>Also plays</dt><dd>${alts.map((a) => `<span class="plink" data-act="profile" data-id="${a.id}" style="color:${col(a.cls)}">${esc(a.name)}</span>`).join(", ")}</dd>` : ""}
+      <dt>Added</dt><dd>${c.joined ? fmtDate(c.joined) : "–"}</dd>
+      ${c.updated && c.updated - (c.joined || 0) > 60000 ? `<dt>Last updated</dt><dd>${timeAgo(c.updated)}</dd>` : ""}
+    </dl>
+    ${hist.length ? `<div class="hist"><h4>Change history</h4><div class="feed">${hist.map((it) => feedItem(it, { inProfile: true })).join("")}</div></div>` : ""}
+    <div class="row wrapr">
+      <button class="primary" data-act="edit" data-id="${c.id}">${ICON.pencil} Edit</button>
+      ${undoable ? `<button class="ghost" data-act="undo" data-id="${c.id}" data-at="${undoable.at}">${ICON.undo} Undo last change</button>` : ""}
+      ${canRemove ? `<button class="ghost danger" data-act="remove" data-id="${c.id}">Remove</button>` : ""}
+    </div>`);
+}
+
+// ---------- add / edit form ----------
+function charForm(c, isEdit) {
+  const sec = c.secondary || [];
+  const oddRace = isEdit && c.race && !RACES.includes(c.race);
+  return `<h3>${isEdit ? `Edit ${esc(c.name)}` : "Add your character"}</h3>
+    ${isEdit ? `<p class="hint">Changed your name for the new server? Just type the new one. Your old name stays searchable, so guildies can still find you.</p>` : ""}
+    ${oddRace ? `<p class="hint warn">${esc(c.race)} isn't a WoW Forever race, so please pick one.</p>` : ""}
+    <div id="dupHint"></div>
+    <form id="cf"><div class="fgrid">
+      <label>Character name *<input name="name" maxlength="24" required value="${esc(c.name || "")}" autocomplete="off"></label>
+      <label>Player / Discord name<input name="player" maxlength="32" value="${esc(c.player || "")}" autocomplete="off"></label>
+      <label>Race *<select name="race" required>${RACES.map((r) => opt(r, RACES.includes(c.race) ? c.race : "Human")).join("")}</select></label>
+      <label>Class *<select name="cls" required></select></label>
+      <label>Spec<select name="spec"></select></label>
+      <label>Role *<select name="role" required>${ROLES.map((r) => opt(r, c.role || "DPS")).join("")}</select></label>
+      <label>Profession 1<select name="prof1">${["None", ...PROFS].map((p) => opt(p, c.prof1 || "None")).join("")}</select></label>
+      <label>Profession 2<select name="prof2">${["None", ...PROFS].map((p) => opt(p, c.prof2 || "None")).join("")}</select></label>
+      <div class="full"><span class="lbl">Secondary professions</span><div class="checks">${SECONDARY.map((p) => `<label><input type="checkbox" name="secondary" value="${p}" ${sec.includes(p) ? "checked" : ""}>${p}</label>`).join("")}</div></div>
+      <label class="full">Level<input name="level" type="number" min="1" max="90" placeholder="Optional" value="${c.level ?? ""}"></label>
+    </div>
+    <p class="err"></p>
+    <div class="row end"><button type="button" class="ghost" data-act="close">Cancel</button><button class="primary">${isEdit ? "Save changes" : "Save to roster"}</button></div></form>`;
+}
+function wireForm(f, c) {
+  const race = el(f, "race"), cls = el(f, "cls"), spec = el(f, "spec"), role = el(f, "role");
+  const syncRole = () => { const r = CLASSES[cls.value]?.s[spec.value]; if (r) role.value = r; };
+  const fillSpecs = (want) => { spec.innerHTML = Object.keys(CLASSES[cls.value]?.s || {}).map((s) => opt(s, want)).join(""); if (!want) syncRole(); };
+  const fillClasses = (want, wantSpec) => { cls.innerHTML = RACE_CLASSES[race.value].map((x) => opt(x, want)).join(""); fillSpecs(cls.value === want ? wantSpec : ""); };
+  race.onchange = () => fillClasses(cls.value);
+  cls.onchange = () => fillSpecs("");
+  spec.onchange = syncRole;
+  fillClasses(c.cls, c.spec);
+  if (c.role) role.value = c.role;
+}
+function readForm(f) {
+  const fd = new FormData(f);
+  const d = Object.fromEntries(fd);
+  d.secondary = fd.getAll("secondary");
+  return d;
+}
+function openAdd() {
+  openModal(charForm({ player: store.get("gbwg-player", "") }, false), { wide: true });
+  const f = $("cf");
+  wireForm(f, {});
+  // Spot people adding a duplicate instead of renaming their existing character
+  const check = () => {
+    const p = norm(el(f, "player").value);
+    const matches = p ? S.chars.filter((c) => norm(c.player) === p && c.cls === el(f, "cls").value && c.race === el(f, "race").value) : [];
+    $("dupHint").innerHTML = matches.length ? `<p class="hint warn">You already have ${matches.map((c) => `<b>${esc(c.name)}</b>`).join(", ")} on the roster as a ${esc(el(f, "race").value)} ${esc(el(f, "cls").value)}. Changed your name?
+      ${matches.map((c) => `<button type="button" class="small" data-act="edit" data-id="${c.id}">Edit ${esc(c.name)} instead</button>`).join(" ")}</p>` : "";
+  };
+  ["player", "race", "cls"].forEach((n) => el(f, n).addEventListener(n === "player" ? "input" : "change", check));
+  check();
+  f.onsubmit = submitter(f, async () => {
+    const d = readForm(f);
+    const out = await send("POST", d);
+    tokens[out.character.id] = out.token;
+    store.set("gbwg-tokens", tokens);
+    if (d.player) store.set("gbwg-player", d.player);
+    closeModal();
+    toast(`Welcome to the roster, ${out.character.name}!`);
+    await load();
+  });
+  setTimeout(() => el(f, "name").focus(), 30);
+}
+function openEdit(id) {
+  const c = byId(id);
+  if (!c) return;
+  openModal(charForm(c, true), { wide: true });
+  const f = $("cf");
+  wireForm(f, c);
+  f.onsubmit = submitter(f, async () => {
+    const d = readForm(f);
+    const out = await send("POST", { ...d, id: c.id, token: tokens[c.id], pin: officerPin });
+    closeModal();
+    if (!out.changed) toast("Nothing changed");
+    else if (out.character.name !== c.name) toast(`Saved – ${c.name} is now ${out.character.name}`);
+    else toast(`${out.character.name} updated`);
+    if (d.player) store.set("gbwg-player", d.player);
+    await load();
+  });
+  setTimeout(() => el(f, "name").select(), 30);
+}
+function submitter(form, fn) {
+  return async (e) => {
+    e.preventDefault();
+    const err = form.querySelector(".err"), btn = form.querySelector("button.primary");
+    err.textContent = "";
+    btn.disabled = true;
+    try { await fn(); } catch (ex) { err.textContent = ex.message; } finally { btn.disabled = false; }
+  };
+}
+
+// ---------- remove / undo / officer ----------
+async function removeChar(id, btn) {
+  const c = byId(id);
+  if (!c || !(await confirmBox(`Remove <b>${esc(c.name)}</b> from the roster?`, "Remove"))) return;
+  btn.disabled = true;
+  try {
+    await send("DELETE", { id: c.id, token: tokens[c.id], pin: officerPin });
+    delete tokens[c.id];
+    store.set("gbwg-tokens", tokens);
+    closeModal();
+    toast(`${c.name} removed`);
+    await load();
+  } catch (e) { toast(e.message, true); } finally { btn.disabled = false; }
+}
+async function undo(id, at, btn) {
+  const c = byId(id), h = c && latestUndoable(c);
+  if (!h) return;
+  const what = h.changes.name ? `rename them back to <b>${esc(h.changes.name[0])}</b>` : `put their ${esc(changedLabels(h.changes).join(", "))} back`;
+  if (!(await confirmBox(`Undo the latest change to <b>${esc(c.name)}</b>? This will ${what}.`, "Undo", false))) return;
+  btn.disabled = true;
+  try {
+    await send("POST", { action: "undo", id, at: +at, pin: officerPin });
+    toast("Change undone");
+    await load();
+    if (modal.open && modal.querySelector(".phead")) openProfile(id);
+    else if (modal.open && modal.querySelector(".seg")) openAllChanges();
+  } catch (e) { toast(e.message, true); } finally { btn.disabled = false; }
+}
+async function officerToggle() {
+  if (officerPin) {
+    officerPin = "";
+    try { sessionStorage.removeItem("gbwg-pin"); } catch {}
+    render();
+    return toast("Logged out of officer mode");
+  }
+  const pin = await promptBox("Enter the officer PIN to edit, remove and undo anything.", { input: true, label: "Officer PIN", type: "password", ok: "Log in", danger: false });
+  if (!pin) return;
+  const out = await send("PUT", { checkPin: true, pin }).catch(() => ({}));
+  if (!out.ok) return toast("Wrong PIN", true);
+  officerPin = pin;
+  try { sessionStorage.setItem("gbwg-pin", pin); } catch {}
+  render();
+  toast("Officer mode on – you can remove characters and undo changes");
+}
+
+// ---------- events ----------
+const ACT = {
+  close: closeModal,
+  add: openAdd,
+  edit: (a) => openEdit(a.dataset.id),
+  profile: (a) => openProfile(a.dataset.id),
+  remove: (a) => removeChar(a.dataset.id, a),
+  undo: (a) => undo(a.dataset.id, a.dataset.at, a),
+  officer: officerToggle,
+  stat: (a) => {
+    const k = a.dataset.k;
+    if (k === "all") return showList("All characters", S.chars);
+    if (k === "players") return listPlayers();
+    showList(roleWord(k), S.chars.filter((c) => c.role === k));
+  },
+  cls: (a) => listClass(a.dataset.v),
+  race: (a) => showList(a.dataset.v, S.chars.filter((c) => c.race === a.dataset.v)),
+  prof: (a) => showList(a.dataset.v, S.chars.filter((c) => hasProf(c, a.dataset.v)), `<p class="muted" style="margin:-6px 0 12px">${SECONDARY.includes(a.dataset.v) ? "Secondary profession" : "Primary profession"}</p>`),
+  player: (a) => listPlayer(a.dataset.v),
+  allChanges: openAllChanges,
+  feedFilter: (a) => { UI.feed = a.dataset.v; openAllChanges(); },
+  clear: () => { UI.f = { q: "", cls: "", role: "", prof: "" }; ["q", "fClass", "fRole", "fProf"].forEach((id) => ($(id).value = "")); drawTable(); },
+  findMe: () => { $("rosterCard").scrollIntoView({ behavior: "smooth", block: "start" }); setTimeout(() => $("q").focus(), 400); },
+  dismissNotice: () => { store.set("gbwg-notice-names", true); $("notice").hidden = true; },
+};
+document.addEventListener("click", (e) => {
+  const a = e.target.closest("[data-act]");
+  if (!a || a.disabled) return;
+  ACT[a.dataset.act]?.(a, e);
+});
+document.addEventListener("keydown", (e) => {
+  if ((e.key === "Enter" || e.key === " ") && e.target.matches?.(".fi[role=button]")) { e.preventDefault(); e.target.click(); }
+});
+$("fClass").innerHTML += CLASS_NAMES.map((c) => opt(c)).join("");
+$("fProf").innerHTML += [...PROFS, ...SECONDARY].map((p) => opt(p)).join("");
+$("q").oninput = (e) => { UI.f.q = e.target.value; drawTable(); };
+$("fClass").onchange = (e) => { UI.f.cls = e.target.value; drawTable(); };
+$("fRole").onchange = (e) => { UI.f.role = e.target.value; drawTable(); };
+$("fProf").onchange = (e) => { UI.f.prof = e.target.value; drawTable(); };
+document.querySelector("thead").onclick = (e) => {
+  const th = e.target.closest("th[data-k]");
+  if (!th) return;
+  UI.sortDir = UI.sortKey === th.dataset.k ? -UI.sortDir : 1;
+  UI.sortKey = th.dataset.k;
+  drawTable();
+};
+
+render();
+load();
+setInterval(() => { if (!document.hidden && !document.querySelector("dialog[open]")) load(); }, 45000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden && S.loaded && !document.querySelector("dialog[open]")) load(); });
+</script>
+</body>
+</html>
